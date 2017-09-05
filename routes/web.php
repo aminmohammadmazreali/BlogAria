@@ -21,13 +21,16 @@ Route::get('/admin',function ()
 });
 
 
+
 //front
 
 Route::get('/','FrontController@news');
 Route::get('/news','FrontController@news');
+Route::get('/news/{id}','FrontController@newsone');
 Route::get('/biography','FrontController@bio');
 Route::get('/interview','FrontController@interview');
 Route::get('/allnote','FrontController@note');
+Route::get('/allnote/{id}','FrontController@noteone');
 Route::get('/allgallery','FrontController@gallery');
 Route::get('/allgallery/{id}','FrontController@galleryone');
 Route::get('/contact','FrontController@contact');
@@ -37,6 +40,7 @@ Route::post('/contactstore','FrontController@contactstore');
 
 Route::group(['middleware' => ['auth']], function () {
 
+    Route::get('/dashboard','HomeController@dashboard');
 
     //post
     Route::get('/post/new','PostController@new');
