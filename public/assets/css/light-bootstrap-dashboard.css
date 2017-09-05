@@ -53,7 +53,7 @@ td,
 button.close {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-  font-family: "Roboto","Helvetica Neue",Arial,sans-serif;
+  font-family: Yekan,Tahoma;
   font-weight: 400; }
 
 h1, .h1, h2, .h2, h3, .h3, h4, .h4 {
@@ -164,6 +164,7 @@ input:focus {
   -ms-transition: all 150ms ease-in;
   transition: all 150ms ease-in; }
 
+
 .btn {
   -webkit-transition: all 100ms ease-in;
   -moz-transition: all 100ms ease-in;
@@ -188,7 +189,7 @@ body > .navbar-collapse {
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 0;
+  right: 0;
   width: 260px;
   display: block;
   z-index: 1;
@@ -222,7 +223,7 @@ body > .navbar-collapse {
     border-bottom: 1px solid rgba(255, 255, 255, 0.2); }
     .sidebar .logo p,
     body > .navbar-collapse .logo p {
-      float: left;
+      float: right;
       font-size: 20px;
       margin: 10px 10px;
       color: #FFFFFF;
@@ -245,7 +246,7 @@ body > .navbar-collapse {
     display: block;
     height: 61px;
     width: 61px;
-    float: left;
+    float: right;
     overflow: hidden; }
     .sidebar .logo-tim img,
     body > .navbar-collapse .logo-tim img {
@@ -289,8 +290,8 @@ body > .navbar-collapse {
     .sidebar .nav i,
     body > .navbar-collapse .nav i {
       font-size: 28px;
-      float: left;
-      margin-right: 15px;
+      float: right;
+      margin-left: 15px;
       line-height: 30px;
       width: 30px;
       text-align: center; }
@@ -301,11 +302,11 @@ body > .navbar-collapse {
       right: 30px; }
   .sidebar .logo,
   body > .navbar-collapse .logo {
-    padding: 10px 15px;
+    padding: 40px 20px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2); }
     .sidebar .logo p,
     body > .navbar-collapse .logo p {
-      float: left;
+      float: right;
       font-size: 20px;
       margin: 10px 10px;
       color: #FFFFFF;
@@ -328,7 +329,7 @@ body > .navbar-collapse {
     display: block;
     height: 61px;
     width: 61px;
-    float: left;
+    float: right;
     overflow: hidden; }
     .sidebar .logo-tim img,
     body > .navbar-collapse .logo-tim img {
@@ -430,7 +431,8 @@ body > .navbar-collapse {
   background: rgba(203, 203, 210, 0.15);
   position: relative;
   z-index: 2;
-  float: right;
+  float: left;
+
   width: calc(100% - 260px);
   min-height: 100%; }
   .main-panel > .content {
@@ -445,6 +447,7 @@ body > .navbar-collapse {
 .main-panel {
   overflow: auto;
   max-height: 100%;
+  float: ;
   height: 100%;
   -webkit-transition-property: top,bottom;
   transition-property: top,bottom;
@@ -886,13 +889,14 @@ body > .navbar-collapse {
   position: relative;
   height: 20px;
   display: block;
+  direction: rtl;
   width: 20px;
   padding: 0px 0px;
   margin: 0px 5px;
   text-align: center; }
   .table .radio .icons,
   .table .checkbox .icons {
-    left: 5px; }
+    left:;: 5px; }
 .table > thead > tr > th,
 .table > tbody > tr > th,
 .table > tfoot > tr > th,
@@ -903,6 +907,7 @@ body > .navbar-collapse {
   vertical-align: middle; }
 .table > thead > tr > th {
   border-bottom-width: 1px;
+
   font-size: 12px;
   text-transform: uppercase;
   color: #9A9A9A;
@@ -962,7 +967,7 @@ body > .navbar-collapse {
 .radio .icons .second-icon {
   display: inline-table;
   position: absolute;
-  left: 0;
+  right: 0;
   top: 0;
   background-color: transparent;
   margin: 0;
@@ -1109,7 +1114,7 @@ body > .navbar-collapse {
 .has-switch span {
   /*     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2) inset; */
   cursor: pointer;
-  float: left;
+  float:right;
   font-size: 11px;
   font-weight: 400;
   height: 24px;
@@ -1145,7 +1150,7 @@ body > .navbar-collapse {
 
 .has-switch label {
   border-radius: 12px;
-  float: left;
+  float: right;
   height: 22px;
   margin: 1px -13px;
   padding: 0;
@@ -1439,7 +1444,7 @@ body > .navbar-collapse {
   font-size: 14px; }
   .footer:not(.footer-big) nav > ul li {
     margin-left: 20px;
-    float: left; }
+    float: right; }
   .footer:not(.footer-big) nav > ul a {
     padding: 10px 0px;
     margin: 10px 10px 10px 0px; }
@@ -1523,7 +1528,7 @@ body > .navbar-collapse {
 .dropdown-with-icons i {
   text-align: center;
   line-height: 28px;
-  float: left; }
+  float: right; }
   .dropdown-with-icons i[class^="pe-"] {
     font-size: 24px;
     width: 46px; }
@@ -1644,10 +1649,10 @@ body > .navbar-collapse {
     height: 245px; }
   .card .table tbody td:first-child,
   .card .table thead th:first-child {
-    padding-left: 15px; }
+    padding-right: 15px; }
   .card .table tbody td:last-child,
   .card .table thead th:last-child {
-    padding-right: 15px; }
+    padding-left: 15px; }
   .card .alert {
     border-radius: 4px;
     position: relative; }
@@ -1931,7 +1936,7 @@ body > .navbar-collapse {
   width: 100%; }
   .ct-square:before {
     display: block;
-    float: left;
+    float: right;
     content: "";
     width: 0;
     height: 0;
@@ -1952,7 +1957,7 @@ body > .navbar-collapse {
   width: 100%; }
   .ct-minor-second:before {
     display: block;
-    float: left;
+    float: right;
     content: "";
     width: 0;
     height: 0;
@@ -1973,7 +1978,7 @@ body > .navbar-collapse {
   width: 100%; }
   .ct-major-second:before {
     display: block;
-    float: left;
+    float: right;
     content: "";
     width: 0;
     height: 0;
@@ -1994,7 +1999,7 @@ body > .navbar-collapse {
   width: 100%; }
   .ct-minor-third:before {
     display: block;
-    float: left;
+    float: right;
     content: "";
     width: 0;
     height: 0;
@@ -2015,7 +2020,7 @@ body > .navbar-collapse {
   width: 100%; }
   .ct-major-third:before {
     display: block;
-    float: left;
+    float: right;
     content: "";
     width: 0;
     height: 0;
@@ -2036,7 +2041,7 @@ body > .navbar-collapse {
   width: 100%; }
   .ct-perfect-fourth:before {
     display: block;
-    float: left;
+    float: right;
     content: "";
     width: 0;
     height: 0;
@@ -2057,7 +2062,7 @@ body > .navbar-collapse {
   width: 100%; }
   .ct-perfect-fifth:before {
     display: block;
-    float: left;
+    float: right;
     content: "";
     width: 0;
     height: 0;
@@ -2078,7 +2083,7 @@ body > .navbar-collapse {
   width: 100%; }
   .ct-minor-sixth:before {
     display: block;
-    float: left;
+    float: right;
     content: "";
     width: 0;
     height: 0;
@@ -2099,7 +2104,7 @@ body > .navbar-collapse {
   width: 100%; }
   .ct-golden-section:before {
     display: block;
-    float: left;
+    float: right;
     content: "";
     width: 0;
     height: 0;
@@ -2120,7 +2125,7 @@ body > .navbar-collapse {
   width: 100%; }
   .ct-major-sixth:before {
     display: block;
-    float: left;
+    float: right;
     content: "";
     width: 0;
     height: 0;
@@ -2141,7 +2146,7 @@ body > .navbar-collapse {
   width: 100%; }
   .ct-minor-seventh:before {
     display: block;
-    float: left;
+    float: right;
     content: "";
     width: 0;
     height: 0;
@@ -2162,7 +2167,7 @@ body > .navbar-collapse {
   width: 100%; }
   .ct-major-seventh:before {
     display: block;
-    float: left;
+    float: right;
     content: "";
     width: 0;
     height: 0;
@@ -2183,7 +2188,7 @@ body > .navbar-collapse {
   width: 100%; }
   .ct-octave:before {
     display: block;
-    float: left;
+    float: right;
     content: "";
     width: 0;
     height: 0;
@@ -2204,7 +2209,7 @@ body > .navbar-collapse {
   width: 100%; }
   .ct-major-tenth:before {
     display: block;
-    float: left;
+    float: right;
     content: "";
     width: 0;
     height: 0;
@@ -2225,7 +2230,7 @@ body > .navbar-collapse {
   width: 100%; }
   .ct-major-eleventh:before {
     display: block;
-    float: left;
+    float: right;
     content: "";
     width: 0;
     height: 0;
@@ -2246,7 +2251,7 @@ body > .navbar-collapse {
   width: 100%; }
   .ct-major-twelfth:before {
     display: block;
-    float: left;
+    float: right;
     content: "";
     width: 0;
     height: 0;
@@ -2267,7 +2272,7 @@ body > .navbar-collapse {
   width: 100%; }
   .ct-double-octave:before {
     display: block;
-    float: left;
+    float: right;
     content: "";
     width: 0;
     height: 0;
@@ -2791,7 +2796,7 @@ body > .navbar-collapse {
     font-size: 14px;
     margin: 0; }
   .navbar-collapse [class^="pe-7s-"] {
-    float: left;
+    float: right;
     font-size: 20px;
     margin-right: 10px; } }
 @media (min-width: 992px) {

@@ -19,7 +19,8 @@
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <link href="/assets/css/pe-icon-7-stroke.css" rel="stylesheet"/>@endsection
-@section('title','پست جدید')
+
+@section('title','ویرایش یادداشت')
 @section('content')
     <div class="content">
         <div class="container-fluid">
@@ -27,7 +28,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="header">
-                            <h4 class="title">پست جدید</h4>
+                            <h4 class="title">ویرایش یادداشت</h4>
                         </div>
                         <div class="content">
                             @if (count($errors) > 0)
@@ -39,47 +40,59 @@
                                     </ul>
                                 </div>
                             @endif
-                            <form method="post" action="/post/store" enctype="multipart/form-data" >
+                            <form method="post" action="/note/{{$note->id}}/update" enctype="multipart/form-data">
                                 <div class="row">
 
                                     {{csrf_field()}}
                                     <div class="col-md-8">
-                                        <div class="form-group">
-                                            <label>عنوان</label>
-                                            <input type="text" class="form-control" name="subject" required placeholder="عنوان پست...">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>عنوان</label>
+                                                    <input type="text" class="form-control" name="subject"
+                                                           value="{{$note->subject}}" required placeholder="subject">
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>متن</label>
+                                                    <textarea rows="11" class="form-control" required name="text"
+                                                              placeholder="your text here">{{$note->text}}</textarea>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>دسته بندی</label>
-                                            <select class="form-control" name="category">
-                                                <option value="-1">مصاحبه</option>
-                                                @foreach($category as $catname)
-                                                    <option value="{{$catname->id}}">{{$catname->name}}</option>
-                                                @endforeach
-                                            </select>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <img class="btn image" src="/file/note/{{$note->image_name}}"
+                                                         width="100%" height="100%">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>عکس جایگزین</label>
+                                                    <input class="form-control" type="file" name="image">
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label>عکس اصلی</label>
-                                            <input class="" type="file" name="image" required>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label>متن</label>
-                                            <textarea rows="11" class="form-control" required name="text" placeholder="متن پست را در این قسمت وارد کنید..."></textarea>
-                                        </div>
-                                    </div>
-                                </div>
 
-                                <button type="submit" class="btn btn-info btn-fill pull-right">ذخیره پست</button>
+
+
+
+
+
+
+                                <button type="submit" class="btn btn-info btn-fill pull-right">ذخیره تغییرات</button>
                                 <div class="clearfix"></div>
                             </form>
                         </div>

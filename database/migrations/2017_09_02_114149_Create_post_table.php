@@ -18,7 +18,8 @@ class CreatePostTable extends Migration
             $table->string('subject');
             $table->longText('text');
             $table->integer('category_id');
-            $table->integer('user_idd');
+            $table->string('image_name');
+            //$table->integer('user_id');
             $table->timestamps();
         });
     }
