@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Comment;
 use App\Galery;
 use App\Message;
 use App\Note;
@@ -130,6 +131,51 @@ class FrontController extends Controller
             $message->save();
 
             return Redirect::back()->withErrors(['پیام شما با موفقیت ارسال شد']);
+
+        } catch (\Illuminate\Database\QueryException $e) {
+            return Redirect::back()->withErrors(['مشکلی پیش آمده لطفا بعدا تلاش کنید.']);
+        }
+    }
+
+    public function storecomment(Request $request,$id)
+    {
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required|min:3',
+            'text' => 'required|min:3',
+            'email'=>'required|email'
+
+        ], [
+            'subject.min' => 'نام وارد شده باید بیشتر از 3 کاراکتر داشته باشد. ',
+            'subject.required' => 'شما باید  نام خود را وارد کنید. ',
+            'text.required' => 'شما باید  متن  را وارد کنید. ',
+            'text.min' => 'متن وارد شده باید بیشتر از 3 کاراکتر داشته باشد. ',
+            'email.required'=> 'شما باید یک ایمیل وارد کنید'
+
+        ]);
+        if ($validator->fails()) {
+            return Redirect::back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $name=$request->input('name');
+        $text=$request->input('text');
+        $email=$request->input('email');
+
+        $comment=new Comment();
+        $comment->user_name=$name;
+        $comment->user_email=$email;
+        $comment->text=$text;
+        $comment->post_id=$id;
+        $comment->status=0;
+
+
+
+        try {
+
+            $comment->save();
+
+            return Redirect::back()->withErrors(['نظر شما با موفقیت در سیستم ذخیره شد و بعد از تایید مدیر نمایش داده خواهد شد.']);
 
         } catch (\Illuminate\Database\QueryException $e) {
             return Redirect::back()->withErrors(['مشکلی پیش آمده لطفا بعدا تلاش کنید.']);

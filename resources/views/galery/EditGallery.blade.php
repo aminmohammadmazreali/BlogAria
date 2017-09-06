@@ -28,7 +28,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="header">
-                            <h4 class="title">ویرایش گالری  <b class="text-success">{{$galery->name}}</b></h4>
+                            <h4 class="title">ویرایش گالری <b class="text-success">{{$galery->name}}</b></h4>
                         </div>
                         <div class="content">
                             @if (count($errors) > 0)
@@ -44,6 +44,31 @@
                                 <div class="row">
 
                                     {{csrf_field()}}
+                                    <div class="col-md-4">
+                                        <div class="col-md-12">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label>عکس های گالری (قابلیت انتخاب چندتایی)</label>
+                                                        <input class="form-control" type="file" name="images[]" multiple>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <p>عکس های داخل گالری : </p>
+                                            <span class="label label-danger">برای حذف عکس ها روی آن ها کلیک کنید</span>
+                                        </div>
+                                        <div class="col-md-12">
+                                            @foreach($galery->images as $item)
+
+                                                <div class="form-group">
+                                                    <imagealert id="{{$item->id}}"><img
+                                                                class=""
+                                                                src="/file/galery/{{$item->image_name}}"
+                                                                width="100%"></imagealert>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
                                     <div class="col-md-8">
                                         <div class="row">
                                             <div class="col-md-12">
@@ -54,50 +79,28 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label>عکس اصلی گالری</label>
-                                                    <input class="form-control" type="file" name="images[]" multiple>
-                                                </div>
-                                            </div>
-                                        </div>
 
-                                        <span class="label label-danger">برای حذف عکس ها روی آن ها کلیک کنید</span>
-                                        {{--image--}}
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                            @foreach($galery->images as $item)
-                                                <div class="col-md-4">
-                                                    <div class="form-group">
-                                                        <a href="/images/{{$item->id}}/delete"><img class="btn image" src="/file/galery/{{$item->image_name}}" width="50" height="50"></a>
-                                                    </div>
-                                                </div>
-                                            @endforeach
+
+
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <img class="btn"
+                                                     src="/file/galery/head/{{$galery->image_name}}"
+                                                     width="100%    ">
                                             </div>
                                         </div>
-                                        {{--End image--}}
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <img class="btn image"
-                                                         src="/file/galery/head/{{$galery->image_name}}"
-                                                         width="100%" height="100%">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label>عکس جایگزین</label>
-                                                    <input class="form-control" type="file" name="image">
-                                                </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>عکس جایگزین</label>
+                                                <input class="form-control" type="file" name="image">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <button type="submit" class="btn btn-info btn-fill pull-right">ذخیره تغییرات</button>
+
+                                <button type="submit" class="btn btn-info btn-fill pull-right">ذخیره تغییرات
+                                </button>
                                 <div class="clearfix"></div>
                             </form>
                         </div>
@@ -132,4 +135,57 @@
 
     <!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
     <script src="/assets/js/demo.js"></script>
+
+    <script>
+        $("imagealert").click(function () {
+            //alert(this.id);
+//            alert($(this).attr('id'));
+
+
+            var amin = $(this).attr('id');
+            swal({
+                title: "پاک شود؟",
+                text: "مطمئن هستید از پاک کردن این عکس؟",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#039BE5",
+                cancelVuttonColor: "#E50814",
+                confirmButtonText: "بله",
+                cancelButtonText: "خیر",
+                closeOnConfirm: false
+            }, function () {
+
+                $.ajax({
+                    type: 'get',
+                    url: '/images/' + amin + '/delete',
+                    success: function (data) {
+
+                        swal({
+                            title: "پاک شد!",
+                            text: "عکس مورد نظر با موفقیت پاک شد.",
+                            type: "success",
+                            confirmButtonColor: "#039BE5"
+                        }, function () {
+                            location.reload();
+                        });
+
+
+                    },
+                    error: function (data) {
+
+                        swal({
+                            title: "پاک نشد!",
+                            text: "عملیات با مشکلی مواجه شده است لطفا بعدا تلاش کنید.",
+                            type: "error",
+                            confirmButtonColor: "#039BE5"
+                        });
+                    }
+
+                });
+
+
+            });
+
+        });
+    </script>
 @endsection

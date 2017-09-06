@@ -37,6 +37,9 @@ Route::get('/contact','FrontController@contact');
 Route::post('/contactstore','FrontController@contactstore');
 
 
+//comment
+Route::post('/storecomment/{id}','FrontController@storecomment');
+
 
 Route::group(['middleware' => ['auth']], function () {
 
@@ -49,6 +52,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/post/{id}/edit','PostController@edit');
     Route::post('/post/{id}/update','PostController@update');
     Route::get('/post/{id}/delete','PostController@delete');
+     //comment
+     Route::get('/comment','PostController@showcomment');
+     Route::get('/comment/{id}/enable','PostController@enablecomment');
+     Route::get('/comment/{id}/delete','PostController@deletecomment');
 
 //category
     Route::get('/category','CategoryController@show');

@@ -52,7 +52,7 @@
 @section('sidebar')
     <aside>
         <!-- NEWS 1 -->
-        <img src="/file/post/{{$note->image_name}}">
+        <img src="/file/note/{{$note->image_name}}">
         <div class="aside-block margin-bottom">
             <a href="/news/{{$note->id}}">  <h3>{{$note->subject}}</h3> </a>
 

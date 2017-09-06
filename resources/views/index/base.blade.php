@@ -10,6 +10,7 @@
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
     <meta name="viewport" content="width=device-width"/>
     <link href="/assets/css/amin.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="/assets/css/sweetalert.min.css">
     @yield('header')
 
 
@@ -63,6 +64,12 @@
                         <p>گالری</p>
                     </a>
                 </li>
+                <li>
+                    <a href="/comment">
+                        <i class="pe-7s-comment"></i>
+                        <p>نظرات</p>
+                    </a>
+                </li>
 
             </ul>
         </div>
@@ -98,12 +105,6 @@
 
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a href="">
-                                <p>پروفایل</p>
-                            </a>
-                        </li>
-
-                        <li>
                             <a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                 <p>خروج</p>
@@ -112,7 +113,19 @@
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             {{ csrf_field() }}
                         </form>
+                        <li>
+                            <a href="">
+                                <p>پروفایل</p>
+                            </a>
+                        </li>
+
+
                         <li class="separator hidden-lg hidden-md"></li>
+                        <li>
+                            <a href="/">
+                                <p>مشاهده سایت</p>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -122,6 +135,7 @@
     </div>
 
 </div>
+<script src="/assets/js/sweetalert.min.js"></script>
 @yield('script')
 </body>
 

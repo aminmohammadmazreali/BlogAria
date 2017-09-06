@@ -38,7 +38,7 @@
 
             </div>
             <div class="content table-responsive table-full-width">
-              <table class="table table-hover table-striped">
+              <table dir="ltr" class="table table-hover table-striped">
                 <thead>
                 <th>کد پست</th>
                 <th>عنوان</th>
@@ -52,8 +52,17 @@
                     <td>{{$name->id}}</td>
                     <td>{{$name->subject}}</td>
                     <td>@if($name->category_id==-1)مصاحبه @else {{$name->category->name}} @endif</td>
-                    <td><img src="/file/post/{{$name->image_name}}" width="50" height="50"></td>
-                    <td><a href="/post/{{$name->id}}/edit"><span class="label label-warning">ویرایش</span></a> <a href="/post/{{$name->id}}/delete"><span class="label label-danger">حذف</span></a> </td>
+                    <td><img src="/file/post/{{$name->image_name}}"  height="5%"></td>
+                    <td>
+                      <a href="/post/{{$name->id}}/edit"  rel="tooltip" title=""
+                         class="btn btn-warning btn-simple btn-xs" data-original-title="ویرایش">
+                        <i class="fa fa-edit"></i>
+                      </a>
+                      <delete id="{{$name->id}}" rel="tooltip" title=""
+                          class="btn btn-danger btn-simple btn-xs" data-original-title="حذف">
+                        <i class="fa fa-times"></i>
+                      </delete>
+                    </td>
                   </tr>
                 @endforeach
                 </tbody>
@@ -92,5 +101,57 @@
 
   <!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
   <script src="/assets/js/demo.js"></script>
+  <script>
+      $("delete").click(function () {
+          //alert(this.id);
+//            alert($(this).attr('id'));
+
+
+          var amin = $(this).attr('id');
+          swal({
+              title: "پاک شود؟",
+              text: "از پاک کردن این پست مطمئن هستید؟ ",
+              type: "warning",
+              showCancelButton: true,
+              confirmButtonColor: "#039BE5",
+              cancelVuttonColor: "#E50814",
+              confirmButtonText: "بله",
+              cancelButtonText: "خیر",
+              closeOnConfirm: false
+          }, function () {
+
+              $.ajax({
+                  type: 'get',
+                  url: '/post/' + amin + '/delete',
+                  success: function (data) {
+
+                      swal({
+                          title: "پاک شد!",
+                          text: "یادداشت مورد نظر با موفقیت پاک شد.",
+                          type: "success",
+                          confirmButtonColor: "#039BE5"
+                      }, function () {
+                          location.reload();
+                      });
+
+
+                  },
+                  error: function (data) {
+
+                      swal({
+                          title: "پاک نشد!",
+                          text: "عملیات با مشکلی مواجه شده است لطفا بعدا تلاش کنید.",
+                          type: "error",
+                          confirmButtonColor: "#039BE5"
+                      });
+                  }
+
+              });
+
+
+          });
+
+      });
+  </script>
 
 @endsection

@@ -71,8 +71,8 @@
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <img class="btn image" src="/file/note/{{$note->image_name}}"
-                                                         width="100%" height="100%">
+                                                    <img class="btn " src="/file/note/{{$note->image_name}}"
+                                                         width="100%">
                                                 </div>
                                             </div>
                                             <div class="col-md-12">

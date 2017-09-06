@@ -60,7 +60,7 @@
                             <p class="category"></p>
                         </div>
                         <div class="content table-responsive table-full-width">
-                            <table class="table table-hover table-striped">
+                            <table dir="ltr" class="table table-hover table-striped">
                                 <thead>
                                 <th>کد دسته</th>
                                 <th>نام</th>
@@ -73,53 +73,46 @@
                                         <td>{{$name->id}}</td>
                                         <td>{{$name->name}}</td>
                                         <td>{{count($name->post)}}</td>
-                                        <td><a ><span class="label label-warning" onclick="document.getElementById('edit{{$name->id}}').style.display='block'">ویرایش</span></a> <a onclick="document.getElementById('delete{{$name->id}}').style.display='block'"><span  class="label label-danger">حذف</span></a> </td>
+                                        <td>
+                                            <a rel="tooltip" title=""
+                                               onclick="document.getElementById('edit{{$name->id}}').style.display='block'"
+                                               class="btn btn-warning btn-simple btn-xs" data-original-title="ویرایش">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                            <button id="{{$name->id}}" type="button" rel="tooltip" title=""
+                                                    class="btn btn-danger btn-simple btn-xs" data-original-title="حذف">
+                                                <i class="fa fa-times"></i>
+                                            </button>
+                                        </td>
                                     </tr>
                                     <div id="edit{{$name->id}}" class="w3-modal">
                                         <div class="w3-modal-content">
                                             <div class="w3-container">
-                                                <span onclick="document.getElementById('edit{{$name->id}}').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-                                               <br>
-                                                <form method="post" action="/category/{{$name->id}}/update">
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <div class="form-group">
-                                                                <label>نام</label>
-                                                                <input type="text" id="nameactegory" class="form-control"
-                                                                       name="namecategory"  value="{{$name->name}}">
-                                                                <input type="hidden" name="_token" id="token" value="{{csrf_token()}}">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <button type="submit" class="btn btn-info btn-fill pull-right">ذخیره</button>
-                                                    <div class="clearfix"></div>
-                                                </form><br>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div id="delete{{$name->id}}" class="w3-modal">
-                                        <div class="w3-modal-content">
-                                            <div class="w3-container">
-                                                <span onclick="document.getElementById('delete{{$name->id}}').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+                                                <span onclick="document.getElementById('edit{{$name->id}}').style.display='none'"
+                                                      class="w3-button w3-display-topright">&times;</span>
                                                 <br>
                                                 <form method="post" action="/category/{{$name->id}}/update">
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <div class="form-group">
-                                                                <label>تمام پست های این دسته نیز حذف می شوند! مطمن هستید که می خواهید حذف کنید؟ <a href="/category/{{$name->id}}/delete"><span class="label label-primary">بله</span></a> </label>
+                                                                <label>نام</label>
+                                                                <input type="text" id="nameactegory"
+                                                                       class="form-control"
+                                                                       name="namecategory" value="{{$name->name}}">
+                                                                <input type="hidden" name="_token" id="token"
+                                                                       value="{{csrf_token()}}">
                                                             </div>
                                                         </div>
                                                     </div>
 
-
+                                                    <a type="submit" class="btn btn-info btn-fill pull-right">ذخیره</a>
                                                     <div class="clearfix"></div>
-                                                </form><br>
-                                                    <div class="clearfix"></div>
-
+                                                </form>
+                                                <br>
                                             </div>
                                         </div>
                                     </div>
+
                                 @endforeach
 
                                 </tbody>
@@ -181,6 +174,58 @@
 
                 }
             });
+        });
+
+
+        $("button").click(function () {
+            //alert(this.id);
+//            alert($(this).attr('id'));
+
+
+            var amin = $(this).attr('id');
+            swal({
+                title: "پاک شود؟",
+                text: "در صورت حذف کردن این دسته تمامی پست های داخل این دسته نیز حذف می شود!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#039BE5",
+                cancelVuttonColor: "#E50814",
+                confirmButtonText: "موافقم!",
+                cancelButtonText: "خیر!",
+                closeOnConfirm: false
+            }, function () {
+
+                $.ajax({
+                    type: 'get',
+                    url: '/category/' + amin + '/delete',
+                    success: function (data) {
+
+                        swal({
+                            title: "پاک شد!",
+                            text: "المنت مورد نظر با موفقیت پاک شد.",
+                            type: "success",
+                            confirmButtonColor: "#039BE5"
+                        }, function () {
+                            location.reload();
+                        });
+
+
+                    },
+                    error: function (data) {
+
+                        swal({
+                            title: "پاک نشد!",
+                            text: "عملیات با مشکلی مواجه شده است لطفا بعدا تلاش کنید.",
+                            type: "error",
+                            confirmButtonColor: "#039BE5"
+                        });
+                    }
+
+                });
+
+
+            });
+
         });
 
     </script>

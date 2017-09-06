@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Comment;
 use App\Message;
 use App\Post;
 use Illuminate\Http\Request;
@@ -151,6 +152,32 @@ class PostController extends Controller
         $post->delete();
         return  Redirect('/post');
     }
+
+    public function showcomment()
+    {
+        $cmessages=Message::all()->where('status',0);
+        $countmessages=count($cmessages);
+        $comment=Comment::paginate(5);
+
+        return view('post.CommentList')->with(['countmessages'=>$countmessages,'comment'=>$comment]);
+    }
+
+    public function enablecomment($id)
+    {
+        $comment=Comment::find($id);
+        $comment->status=1;
+        $comment->update();
+
+        return Redirect::back();
+    }
+
+    public function deletecomment($id)
+    {
+        $comment=Comment::find($id);
+        $comment->delete();
+        return Redirect::back();
+    }
+
 
 
 }

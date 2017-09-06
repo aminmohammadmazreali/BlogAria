@@ -34,7 +34,7 @@
 
                         </div>
                         <div class="content table-responsive table-full-width">
-                            <table class="table table-hover table-striped">
+                            <table class="table table-hover table-striped" dir="ltr">
                                 <thead>
                                 <th>کد پیام</th>
                                 <th>نام ارسال کننده</th>
@@ -48,10 +48,17 @@
                                     <tr>
                                         <td>{{$name->id}}</td>
                                         <td>{{$name->name}}</td>
-                                        <td><a href="/messages/{{$name->id}}">{{$name->email}}</a> </td>
-                                        <td>@if($name->status==0)<span class="label label-danger">دیده نشده</span> @else <span class="label label-success">دیده شده</span> @endif</td>
-                                        <td><a href="/messages/{{$name->id}}/delete"><span
-                                                        class="label label-danger">Delete</span></a></td>
+                                        <td>{{$name->email}}</td>
+                                        <td>@if($name->status==0)<span class="label label-danger">دیده نشده</span> @else
+                                                <span class="label label-success">دیده شده</span> @endif</td>
+                                        <td>
+                                            <button id="{{$name->id}}" type="button" rel="tooltip" title="" class="btn btn-danger btn-simple btn-xs" data-original-title="حذف">
+                                                <i class="fa fa-times"></i>
+                                            </button>
+                                            <a href="/messages/{{$name->id}}" type="button" rel="tooltip" title="" class="btn btn-info btn-simple btn-xs" data-original-title="مشاهده">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
+                                        </td>
                                     </tr>
                                 @endforeach
                                 </tbody>
@@ -90,5 +97,59 @@
 
     <!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
     <script src="/assets/js/demo.js"></script>
+
+    <script>
+        $("button").click(function () {
+            //alert(this.id);
+//            alert($(this).attr('id'));
+
+
+            var amin = $(this).attr('id');
+            swal({
+                title: "پاک شود؟",
+                text: "در صورت حذف کردن، این المنت قابل بازیابی نمیباشد!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#039BE5",
+                cancelVuttonColor: "#E50814",
+                confirmButtonText: "بله!",
+                cancelButtonText: "خیر!",
+                closeOnConfirm: false
+            }, function () {
+
+                $.ajax({
+                    type: 'get',
+                    url: '/messages/' + amin + '/delete',
+                    success: function (data) {
+
+                        swal({
+                            title: "پاک شد!",
+                            text: "المنت مورد نظر با موفقیت پاک شد.",
+                            type: "success",
+                            confirmButtonColor: "#039BE5"
+                        }, function () {
+                            location.reload();
+                        });
+
+
+                    },
+                    error: function (data) {
+
+                        swal({
+                            title: "پاک نشد!",
+                            text: "عملیات با مشکلی مواجه شده است لطفا بعدا تلاش کنید.",
+                            type: "error",
+                            confirmButtonColor: "#039BE5"
+                        });
+                    }
+
+                });
+
+
+            });
+
+        });
+
+    </script>
 
 @endsection

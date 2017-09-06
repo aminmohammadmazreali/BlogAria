@@ -31,6 +31,6 @@ class MessageController extends Controller
     {
         $message=Message::find($id);
         $message->delete();
-        return redirect('/messages');
+        return "success";
     }
 }
