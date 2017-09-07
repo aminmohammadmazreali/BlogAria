@@ -7,6 +7,7 @@ use App\Note;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
+use Intervention\Image\Facades\Image;
 
 class NoteController extends Controller
 {
@@ -52,7 +53,7 @@ class NoteController extends Controller
         if (Input::hasFile('image')) {
             $file = Input::file('image');
             $image_path = time() . $file->getClientOriginalName();
-            $file->move('file/note', $image_path);
+            Image::make($file->getRealPath())->fit(500, 400)->save('file/note/'.$image_path)->destroy();
 
 
         }
@@ -111,7 +112,7 @@ class NoteController extends Controller
         if (Input::hasFile('image')) {
             $file = Input::file('image');
             $image_path = time() . $file->getClientOriginalName();
-            $file->move('file/note', $image_path);
+            Image::make($file->getRealPath())->fit(500, 400)->save('file/note/'.$image_path)->destroy();
 
             $note->image_name = $image_path;
 

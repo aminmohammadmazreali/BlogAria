@@ -79,10 +79,10 @@
                                                class="btn btn-warning btn-simple btn-xs" data-original-title="ویرایش">
                                                 <i class="fa fa-edit"></i>
                                             </a>
-                                            <button id="{{$name->id}}" type="button" rel="tooltip" title=""
+                                            <delete id="{{$name->id}}"  rel="tooltip" title=""
                                                     class="btn btn-danger btn-simple btn-xs" data-original-title="حذف">
                                                 <i class="fa fa-times"></i>
-                                            </button>
+                                            </delete>
                                         </td>
                                     </tr>
                                     <div id="edit{{$name->id}}" class="w3-modal">
@@ -177,7 +177,7 @@
         });
 
 
-        $("button").click(function () {
+        $("delete").click(function () {
             //alert(this.id);
 //            alert($(this).attr('id'));
 
@@ -190,8 +190,8 @@
                 showCancelButton: true,
                 confirmButtonColor: "#039BE5",
                 cancelVuttonColor: "#E50814",
-                confirmButtonText: "موافقم!",
-                cancelButtonText: "خیر!",
+                confirmButtonText: "موافقم",
+                cancelButtonText: "خیر",
                 closeOnConfirm: false
             }, function () {
 
@@ -204,6 +204,7 @@
                             title: "پاک شد!",
                             text: "المنت مورد نظر با موفقیت پاک شد.",
                             type: "success",
+                            confirmButtonText: "تایید",
                             confirmButtonColor: "#039BE5"
                         }, function () {
                             location.reload();

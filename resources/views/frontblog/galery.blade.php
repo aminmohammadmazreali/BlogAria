@@ -10,16 +10,27 @@
     <!-- ARTICLES -->
     <div class="s-12 l-9">
 
-        <!-- ARTICLE 1 -->
-        <article class="post-1 line">
+        <!-- ARTICLE 1 --><p>گالری ها</p>
+        <article class="line">
             <!-- image -->
             @foreach($news as $item)
-                <div class="s-12 l-6 post-image post-text">
-                    <a href="/allgallery/{{$item->id}}">
-                        <img src="/file/galery/head/{{$item->image_name}}">
-                    </a>
+                <div class="gallery">
+                    <div class="all">
+                        <div class="s-6 l-12">
+                        <a href="/allgallery/{{$item->id}}">
+                            <img src="/file/galery/head/{{$item->image_name}}" alt="Avatar" class="image">
+                            <div class="overlay">
+                                <div class="text">مشاهده </div>
+
+                            </div>
+                            <div class="desc"><aa style="color: white">{{$item->name}}</aa></div>
+                        </a>
+                        </div>
+                    </div>
                 </div>
+
             @endforeach
+
 
 
         </article>
@@ -33,7 +44,7 @@
         <!-- NEWS 1 -->
         <img src="/file/note/{{$note->image_name}}">
         <div class="aside-block margin-bottom">
-            <a href="/allnote/{{$note->id}}">  <h3>{{$note->subject}}</h3> </a>
+            <a href="/allnote/{{$note->id}}"><h3>{{$note->subject}}</h3></a>
 
             <p class="demo-3">
                 {{$note->text}}

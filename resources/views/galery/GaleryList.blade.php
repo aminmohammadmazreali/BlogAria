@@ -42,7 +42,7 @@
                 <thead>
                 <th>کد گالری</th>
                 <th>عنوان</th>
-                <th>عکس اصلی گالری</th>
+                <th>تعداد عکس ها</th>
                 <th>عملیات</th>
                 </thead>
                 <tbody>
@@ -50,7 +50,7 @@
                   <tr>
                     <td>{{$item->id}}</td>
                     <td>{{$item->name}}</td>
-                    <td><img src="/file/galery/head/{{$item->image_name}}"  height="5%"></td>
+                    <td>{{count($item->images)}}</td>
                     <td>
                       <a href="/gallery/{{$item->id}}/edit"rel="tooltip" title="" class="btn btn-info btn-simple btn-xs" data-original-title="ویرایش">
                         <i class="fa fa-edit"></i>

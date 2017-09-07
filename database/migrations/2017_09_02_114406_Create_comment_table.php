@@ -20,6 +20,7 @@ class CreateCommentTable extends Migration
             $table->string('user_email');
             $table->integer('post_id');
             $table->integer('status');
+            $table->time('time')->default(time());
             $table->timestamps();
         });
     }

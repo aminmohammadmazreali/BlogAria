@@ -14,86 +14,86 @@ class FrontController extends Controller
 {
     public function home()
     {
-        $note=Note::first();
+        $note=Note::all()->random(1);
         $galery=Galery::paginate(2);
 
         $post=Post::paginate(5);
 
-        return view('frontblog.index')->with(['note'=>$note,'news'=>$post,'galery'=>$galery]);
+        return view('frontblog.index')->with(['note'=>array_first($note),'news'=>$post,'galery'=>$galery]);
     }
 
     public function news()
     {
-        $note=Note::first();
+        $note=Note::all()->random(1);
         $galery=Galery::paginate(2);
 
         $post=Post::paginate(5);
 
-        return view('frontblog.index')->with(['note'=>$note,'news'=>$post,'galery'=>$galery]);
+        return view('frontblog.index')->with(['note'=>array_first($note),'news'=>$post,'galery'=>$galery]);
     }
 
     public function newsone($id)
     {
-        $note=Note::first();
+        $note=Note::all()->random(1);
         $galery=Galery::paginate(2);
 
         $post=Post::find($id);
 
-        return view('frontblog.postbody')->with(['note'=>$note,'news'=>$post,'galery'=>$galery]);
+        return view('frontblog.postbody')->with(['note'=>array_first($note),'news'=>$post,'galery'=>$galery]);
     }
 
     public function bio()
     {
-        $note=Note::first();
+        $note=Note::all()->random(1);
         $galery=Galery::paginate(2);
-        return view('frontblog.about')->with(['note'=>$note,'galery'=>$galery]);
+        return view('frontblog.about')->with(['note'=>array_first($note),'galery'=>$galery]);
     }
 
     public function interview()
     {
-        $note=Note::first();
+        $note=Note::all()->random(1);
         $galery=Galery::paginate(2);
         $post=Post::paginate(5)->where('category_id',-1);
-        return view('frontblog.interview')->with(['note'=>$note,'news'=>$post,'galery'=>$galery]);
+        return view('frontblog.interview')->with(['note'=>array_first($note),'news'=>$post,'galery'=>$galery]);
     }
 
     public function note()
     {
-        $note=Post::first();
+        $note=Post::all()->random(1);
         $galery=Galery::paginate(2);
         $post=Note::paginate(4);
-        return view('frontblog.note')->with(['note'=>$note,'news'=>$post,'galery'=>$galery]);
+        return view('frontblog.note')->with(['note'=>array_first($note),'news'=>$post,'galery'=>$galery]);
     }
 
     public function noteone($id)
     {
-        $note=Post::first();
+        $note=Post::all()->random(1);
         $galery=Galery::paginate(2);
         $post=Note::find($id);
-        return view('frontblog.noteblade')->with(['note'=>$note,'news'=>$post,'galery'=>$galery]);
+        return view('frontblog.noteblade')->with(['note'=>array_first($note),'news'=>$post,'galery'=>$galery]);
     }
 
     public function gallery()
     {
         $post=Galery::paginate(6);
-        $note=Note::first();
+        $note=Note::all()->random(1);
         $galery=Post::paginate(2);
-        return view('frontblog.galery')->with(['note'=>$note,'news'=>$post,'galery'=>$galery]);
+        return view('frontblog.galery')->with(['note'=>array_first($note),'news'=>$post,'galery'=>$galery]);
     }
 
     public function galleryone($id)
     {
         $post=Galery::find($id);
-        $note=Note::first();
+        $note=Note::all()->random(1);
         $galery=Post::paginate(2);
-        return view('frontblog.galerybody')->with(['note'=>$note,'news'=>$post,'galery'=>$galery]);
+        return view('frontblog.galerybody')->with(['note'=>array_first($note),'news'=>$post,'galery'=>$galery]);
     }
 
     public function contact()
     {
-        $note=Note::first();
+        $note=Note::all()->random(1);
         $galery=Galery::paginate(2);
-        return view('frontblog.contact')->with(['note'=>$note,'galery'=>$galery]);
+        return view('frontblog.contact')->with(['note'=>array_first($note),'galery'=>$galery]);
     }
 
     public function contactstore(Request $request)

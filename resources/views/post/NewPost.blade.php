@@ -67,6 +67,7 @@
                                         <div class="form-group">
                                             <label>عکس اصلی</label>
                                             <input class="" type="file" name="image" required>
+                                            <span class="label label-warning">عکس شما باید در اندازه (عرض :500 و ارتفاع :400) باشد.</span>
                                         </div>
                                     </div>
                                 </div>

@@ -90,3 +90,19 @@ Route::group(['middleware' => ['auth']], function () {
 });
 
 
+Route::get('/test',function (){
+
+
+
+    $message=\App\Message::find(1);
+    $dev= str($message->time);
+    echo $message->time ." ".time();
+
+    $date=jdate(date($dev))->format('%B');
+
+    //$date = \Morilog\Jalali\Facades\jDate::forge(time());
+    //$date = jdate(time())->format('date');
+    return $date;
+});
+
+

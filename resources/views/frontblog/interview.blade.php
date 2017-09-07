@@ -32,7 +32,7 @@
                     <p class="demo-3">
                         {{$item->text}}
                     </p>
-                    <a class="continue-reading" href="/news/{{$item->id}}">ادامه یادداشت</a>
+                    <a class="continue-reading" href="/news/{{$item->id}}">ادامه مصاحبه</a>
                 </div>
             </article>
 

@@ -7,7 +7,30 @@
 @section('head')
     <link rel="stylesheet" type="text/css" media="screen"
           href="http://cdnjs.cloudflare.com/ajax/libs/fancybox/1.3.4/jquery.fancybox-1.3.4.css"/>
+
+
     <style type="text/css">
+        div.gallery {
+            margin: 5px;
+
+            float: left;
+            width: 180px;
+        }
+
+        div.gallery:hover {
+            border: 1px solid #777;
+        }
+
+        div.gallery img {
+            width: 100%;
+            height: auto;
+        }
+
+        div.desc {
+            padding: 15px;
+            text-align: center;
+        }
+
         a.fancybox img {
             border: none;
             box-shadow: 0 1px 7px rgba(0, 0, 0, 0.6);
@@ -41,11 +64,14 @@
 
 
     @foreach($news->images as $item)
+        <div class="gallery">
     <!-- ARTICLES -->
-    <div class="s-12 l-4">
+    <div class="s-12 l-12">
         <img class="fancybox" src="/file/galery/{{$item->image_name}}">
     </div>
+        </div>
     @endforeach
+
 
 
 

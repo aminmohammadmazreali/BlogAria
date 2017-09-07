@@ -43,7 +43,8 @@
                 <th>کد پست</th>
                 <th>عنوان</th>
                 <th>دسته</th>
-                <th>عکس اصلی</th>
+                <th>تعداد نظرات</th>
+                <th>تاریخ ایجاد</th>
                 <th>عملیات</th>
                 </thead>
                 <tbody>
@@ -52,7 +53,8 @@
                     <td>{{$name->id}}</td>
                     <td>{{$name->subject}}</td>
                     <td>@if($name->category_id==-1)مصاحبه @else {{$name->category->name}} @endif</td>
-                    <td><img src="/file/post/{{$name->image_name}}"  height="5%"></td>
+                    <td>{{count($name->comment)}}</td>
+                    <td>{{jdate(time())->format('%d %B %Y')}}</td>
                     <td>
                       <a href="/post/{{$name->id}}/edit"  rel="tooltip" title=""
                          class="btn btn-warning btn-simple btn-xs" data-original-title="ویرایش">

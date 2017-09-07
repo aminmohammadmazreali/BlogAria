@@ -18,6 +18,7 @@ class CreateNoteTable extends Migration
             $table->string('subject');
             $table->longText('text');
             $table->string('image_name');
+            $table->string('time')->default(time());
             $table->timestamps();
         });
     }

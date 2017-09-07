@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width"/>
   <title>دکتر الهام فخاری -@yield('title')</title>
 
+
   <meta name="description" content="Download free amazing responsive Fashion Blog template."/>
   <meta name="keywords" content="free, responsive, blog, fashion, web site, template"/>
   <link rel="stylesheet" href="/css/components.css">

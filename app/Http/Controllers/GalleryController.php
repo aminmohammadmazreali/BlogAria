@@ -8,6 +8,7 @@ use App\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
+use Intervention\Image\Facades\Image;
 
 class GalleryController extends Controller
 {
@@ -47,7 +48,7 @@ class GalleryController extends Controller
         if (Input::hasFile('image')) {
             $file = Input::file('image');
             $image_path = time() . $file->getClientOriginalName();
-            $file->move('file/galery/head', $image_path);
+            Image::make($file->getRealPath())->fit(500, 400)->save('file/galery/head/'.$image_path)->destroy();
 
         }
 
@@ -117,7 +118,7 @@ class GalleryController extends Controller
         if (Input::hasFile('image')) {
             $file = Input::file('image');
             $image_path = time() . $file->getClientOriginalName();
-            $file->move('file/galery/head', $image_path);
+            Image::make($file->getRealPath())->fit(500, 400)->save('file/galery/head/'.$image_path)->destroy();
             $galery->image_name = $image_path;
         }
 

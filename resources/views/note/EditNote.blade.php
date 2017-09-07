@@ -79,6 +79,7 @@
                                                 <div class="form-group">
                                                     <label>عکس جایگزین</label>
                                                     <input class="form-control" type="file" name="image">
+                                                    <span class="label label-warning">عکس شما باید در اندازه (عرض :500 و ارتفاع :400) باشد.</span>
                                                 </div>
                                             </div>
                                         </div>

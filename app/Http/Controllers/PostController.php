@@ -9,19 +9,19 @@ use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
+use Intervention\Image\Facades\Image;
 
 class PostController extends Controller
 {
     public function new()
     {
         $category = Category::all();
-        if (count($category)==0)
-        {
+        if (count($category) == 0) {
             return Redirect('/category');
         }
-        $cmessages=Message::all()->where('status',0);
-        $countmessages=count($cmessages);
-        return view('post.NewPost')->with(['category' => $category,'countmessages'=>$countmessages]);
+        $cmessages = Message::all()->where('status', 0);
+        $countmessages = count($cmessages);
+        return view('post.NewPost')->with(['category' => $category, 'countmessages' => $countmessages]);
     }
 
     public function store(Request $request)
@@ -29,72 +29,64 @@ class PostController extends Controller
         $validator = \Validator::make($request->all(), [
             'subject' => 'required|min:3',
             'text' => 'required|min:3'
-
         ], [
             'subject.min' => 'عنوان وارد شده باید بیشتر از 3 کاراکتر داشته باشد. ',
             'subject.required' => 'شما باید  عنوان را وارد کنید. ',
             'text.required' => 'شما باید  متن  را وارد کنید. ',
             'text.min' => 'متن وارد شده باید بیشتر از 3 کاراکتر داشته باشد. ',
-
-
         ]);
         if ($validator->fails()) {
             return Redirect::back()
                 ->withErrors($validator)
                 ->withInput();
         }
+        $subject = $request->input('subject');
+        $text = $request->input('text');
+        $category = $request->input('category');
+        if (Input::hasFile('image')) {
 
-        $subject=$request->input('subject');
-        $text=$request->input('text');
-        $category=$request->input('category');
+            $file = Input::file('image');
+            $image_path = time() . $file->getClientOriginalName();
+            Image::make($file->getRealPath())->fit(500, 400)->save('file/post/'.$image_path)->destroy();
+//
+//            $file=Input::file('image');
 
-        if(Input::hasFile('image')){
-            $file=Input::file('image');
-            $image_path=time().$file->getClientOriginalName();
-            $file->move('file/post' ,$image_path);
-
-
+//            $file->move('file/post' ,$image_path);
         }
-
-
-
-        $post=new Post();
-        $post->subject=$subject;
-        $post->text=$text;
-        $post->category_id=$category;
-        $post->image_name=$image_path;
-
-
-
+        $post = new Post();
+        $post->subject = $subject;
+        $post->text = $text;
+        $post->category_id = $category;
+        $post->image_name = $image_path;
         try {
-
             $post->save();
-
             return Redirect('/post');
-
         } catch (\Illuminate\Database\QueryException $e) {
             return Redirect::back()->withErrors(['مشکلی پیش آمده لطفا بعدا تلاش کنید.']);
         }
+
 
     }
 
     public function showposts()
     {
-        $cmessages=Message::all()->where('status',0);
-        $countmessages=count($cmessages);
-        $post=Post::paginate(5);
-        return view('post.PostList')->with(['post'=>$post,'countmessages'=>$countmessages]);
+        $cmessages = Message::all()->where('status', 0);
+        $countmessages = count($cmessages);
+        $post = Post::paginate(5);
+        return view('post.PostList')->with(['post' => $post, 'countmessages' => $countmessages]);
     }
+
     public function edit($id)
     {
-        $post=Post::find($id);
-        $cmessages=Message::all()->where('status',0);
-        $countmessages=count($cmessages);
-        $category=Category::all()->whereNotIn('id',$post->category_id);
+        $post = Post::find($id);
+        $cmessages = Message::all()->where('status', 0);
+        $countmessages = count($cmessages);
+        $category = Category::all()->whereNotIn('id', $post->category_id);
 
-        return view('post.EditPost')->with(['post'=>$post,'category'=>$category,'countmessages'=>$countmessages]);
+        return view('post.EditPost')->with(['post' => $post, 'category' => $category, 'countmessages' => $countmessages]);
     }
-    public function update(Request $request,$id)
+
+    public function update(Request $request, $id)
     {
         $validator = \Validator::make($request->all(), [
             'subject' => 'required|min:3',
@@ -114,25 +106,25 @@ class PostController extends Controller
                 ->withInput();
         }
 
-        $subject=$request->input('subject');
-        $text=$request->input('text');
-        $category=$request->input('category');
+        $subject = $request->input('subject');
+        $text = $request->input('text');
+        $category = $request->input('category');
 
-        $post=Post::find($id);
+        $post = Post::find($id);
 
-        if(Input::hasFile('image')){
-            $file=Input::file('image');
-            $image_path=time().$file->getClientOriginalName();
-            $file->move('file/post' ,$image_path);
+        if (Input::hasFile('image')) {
+            $file = Input::file('image');
+            $image_path = time() . $file->getClientOriginalName();
+            Image::make($file->getRealPath())->fit(500, 400)->save('file/post/'.$image_path)->destroy();
 
-            $post->image_name=$image_path;
+            $post->image_name = $image_path;
 
         }
 
 
-        $post->subject=$subject;
-        $post->text=$text;
-        $post->category_id=$category;
+        $post->subject = $subject;
+        $post->text = $text;
+        $post->category_id = $category;
 
 
         try {
@@ -148,24 +140,24 @@ class PostController extends Controller
 
     public function delete($id)
     {
-        $post=Post::find($id);
+        $post = Post::find($id);
         $post->delete();
-        return  Redirect('/post');
+        return Redirect('/post');
     }
 
     public function showcomment()
     {
-        $cmessages=Message::all()->where('status',0);
-        $countmessages=count($cmessages);
-        $comment=Comment::paginate(5);
+        $cmessages = Message::all()->where('status', 0);
+        $countmessages = count($cmessages);
+        $comment = Comment::paginate(5);
 
-        return view('post.CommentList')->with(['countmessages'=>$countmessages,'comment'=>$comment]);
+        return view('post.CommentList')->with(['countmessages' => $countmessages, 'comment' => $comment]);
     }
 
     public function enablecomment($id)
     {
-        $comment=Comment::find($id);
-        $comment->status=1;
+        $comment = Comment::find($id);
+        $comment->status = 1;
         $comment->update();
 
         return Redirect::back();
@@ -173,11 +165,10 @@ class PostController extends Controller
 
     public function deletecomment($id)
     {
-        $comment=Comment::find($id);
+        $comment = Comment::find($id);
         $comment->delete();
         return Redirect::back();
     }
-
 
 
 }

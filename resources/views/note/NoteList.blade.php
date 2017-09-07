@@ -42,7 +42,7 @@
                 <thead>
                 <th>کد </th>
                 <th>عنوان</th>
-                <th>عکس اصلی</th>
+                <th>تاریخ ایجاد</th>
                 <th>عملیات</th>
                 </thead>
                 <tbody>
@@ -50,7 +50,7 @@
                   <tr>
                     <td>{{$name->id}}</td>
                     <td>{{$name->subject}}</td>
-                      <td><img src="/file/note/{{$name->image_name}}"  height="5%"></td>
+                      <td>{{jdate(time())->format('%d %B %Y')}}</td>
                     <td>
                       <a  href="/note/{{$name->id}}/edit" rel="tooltip" title=""
                               class="btn btn-warning btn-simple btn-xs" data-original-title="ویرایش">
