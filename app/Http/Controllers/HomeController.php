@@ -29,8 +29,8 @@ class HomeController extends Controller
 
     public function dashboard()
     {
-        $post=Post::all();
-        $note=Note::all();
+        $post=Post::paginate(5);
+        $note=Note::paginate(5);
         $gallary=Galery::all();
 
         $cmessages=Message::all()->where('status',0);

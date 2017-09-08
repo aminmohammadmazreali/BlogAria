@@ -75,6 +75,7 @@
 
 @endsection
 @section('sidebar')
+    @if(!is_null($note))
     <aside>
         <!-- NEWS 1 -->
         <img src="/file/note/{{$note->image_name}}">
@@ -89,4 +90,5 @@
 
 
     </aside>
+    @endif
 @endsection

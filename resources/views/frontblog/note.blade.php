@@ -8,7 +8,7 @@
 
     <!-- ARTICLES -->
     <div class="s-12 l-9">
-
+        <p>یادداشت ها</p>
         <!-- ARTICLE 1 -->
         @foreach($news as $item)
 
@@ -50,6 +50,7 @@
 @endsection
 
 @section('sidebar')
+    @if(!is_null($note))
     <aside>
         <!-- NEWS 1 -->
         <img src="/file/post/{{$note->image_name}}">
@@ -64,4 +65,5 @@
 
 
     </aside>
+    @endif
 @endsection

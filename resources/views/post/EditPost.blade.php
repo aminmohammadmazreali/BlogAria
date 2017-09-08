@@ -58,8 +58,7 @@
                                                 <div class="form-group">
                                                     <label>دسته</label>
                                                     <select class="form-control" name="category">
-                                                        <option selected
-                                                                value="{{$post->category->id}}">{{$post->category->name}}</option>
+                                                        <option selected value="@if($post->category_id==-1)-1 @else {{$post->category->id}} @endif">@if($post->category_id==-1)مصاحبه @else {{$post->category->name}} @endif</option>
                                                         @foreach($category as $catname)
                                                             <option value="{{$catname->id}}">{{$catname->name}}</option>
                                                         @endforeach

@@ -16,7 +16,7 @@
 
         .image {
             display: block;
-            width:100%;
+            width: 100%;
             height: auto;
         }
 
@@ -28,7 +28,7 @@
             background-color: #162b4d;
             overflow: hidden;
             width: 100%;
-            height:0;
+            height: 0;
             transition: .5s ease;
         }
 
@@ -48,8 +48,6 @@
             transform: translate(-50%, -50%);
             -ms-transform: translate(-50%, -50%);
         }
-
-
 
         div.gallery {
             margin: 5px;
@@ -77,7 +75,8 @@
     <link rel="stylesheet" href="/css/amin.css">
 
     <!-- CUSTOM STYLE -->
-    <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,700&subset=latin,latin-ext' rel='stylesheet'
+          type='text/css'>
     <link rel="stylesheet" href="/css/template-style.css">
     <script type="text/javascript" src="/js/jquery-1.8.3.min.js"></script>
     <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
@@ -169,14 +168,14 @@
                 </div>
             </aside>
             <aside>
-
+            @if(!is_null($galery))
                 @foreach($galery as $item)
-                <!-- NEWS 1 -->
-                <a href="/allgallery/{{$item->id}}"><img src="/file/galery/head/{{$item->image_name}}"></a>
+                    <!-- NEWS 1 -->
+                        <a href="/allgallery/{{$item->id}}"><img src="/file/galery/head/{{$item->image_name}}"></a>
 
                 @endforeach
-
-                <!-- AD REGION -->
+            @endif
+            <!-- AD REGION -->
 
             </aside>
         </div>

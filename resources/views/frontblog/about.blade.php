@@ -71,18 +71,20 @@
 @endsection
 
 @section('sidebar')
-    <aside>
-        <!-- NEWS 1 -->
-        <img src="/file/note/{{$note->image_name}}">
-        <div class="aside-block margin-bottom">
-            <a href="/allnote/{{$note->id}}">  <h3>{{$note->subject}}</h3> </a>
+    @if(!is_null($note))
+        <aside>
+            <!-- NEWS 1 -->
+            <img src="/file/note/{{$note->image_name}}">
+            <div class="aside-block margin-bottom">
+                <a href="/allnote/{{$note->id}}"><h3>{{$note->subject}}</h3></a>
 
-            <p class="demo-3">
-                {{$note->text}}
-            </p>
+                <p class="demo-3">
+                    {{$note->text}}
+                </p>
 
-        </div>
+            </div>
 
 
-    </aside>
+        </aside>
+    @endif
 @endsection
